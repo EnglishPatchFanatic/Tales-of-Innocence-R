@@ -1,5 +1,7 @@
 # Tales of Innocence R - Patching Tutorial
 
+This is not my project! This is simply a tutorial readme!
+
 ## Description
 
 This is to help users apply the english patch for Tales of Innocence R
@@ -56,3 +58,8 @@ Simply press [OK] and if connection is successful.
 ## Help
 
 During the transfer of files, if the connection has been disrupted, I highly recommend deleting the files transferred to the phone as simply overwriting them causes corruption in the data thus will likely cause it not to be patched even if overwritten.
+
+## Credits
+
+Basically Everything! Thank you Lifebottleproductions!
+https://github.com/lifebottle/Tales-of-Innocence-R
