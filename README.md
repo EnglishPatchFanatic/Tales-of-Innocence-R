@@ -1,101 +1,58 @@
-# Tales of Innocence R
+# Tales of Innocence R - Patching Tutorial
 
-An attempt to create an English patch for Tales of Innocence R.
+## Description
 
-![ToIR](https://raw.githubusercontent.com/pnvnd/Tales-of-Innocence-R/main/toir.png)
+This is to help users apply the english patch for Tales of Innocence R
 
-Discord: https://discord.gg/tmDgBDNPpE  
+## Getting Started
 
-Spreadsheet (Current): https://docs.google.com/spreadsheets/d/1hfZIQXpGyQw6dQtG_oVKI7bkO0teIUG9bXN9kKrANBw/edit?usp=sharing  
-Spreadsheet (Outdated): https://docs.google.com/spreadsheets/d/1X_-WfAYM5J2JL2uDAK0JPA9P8zGQHe2G3otozGymd1I/edit?usp=sharing  
+Tools and plugins:
+ 1. Modded Vita
+ 2. Vitashell
+ 3. If you don't have it yet, please download rePatch. Download it here https://github.com/dots-tb/rePatch-reDux0
 
+For Patching the files
+ 1. Xdelta (PC): https://www.romhacking.net/utilities/598/
+ 2. Unipatcher (Android): https://play.google.com/store/apps/details?id=org.emunix.unipatcher
 
-## Hacker Note 1
+FTP program
+ 1. WinSCP: https://winscp.net/eng/download.php
+ 2. AndFTP: https://play.google.com/store/apps/details?id=lysesoft.andftp
 
-![ToIR](https://raw.githubusercontent.com/pnvnd/Tales-of-Innocence-R/main/decrypt_toir.gif)  
+Last, but not the least, the Patch files: https://github.com/lifebottle/Tales-of-Innocence-R
 
-1. Get `pkg2zip` https://github.com/mmozeiko/pkg2zip 
-2. Also, get `psvpfstools` https://github.com/motoharu-gosuto/psvpfstools
-3. With `pkg2zip`, extract the `pkg` `pkg2zip.exe` `innocenceR.pkg`
-4. It should produce this zip file `テイルズ オブ イノセンス R [PCSG00009] [JPN].zip`. Extract it.
-5. It should extract a folder named app, cut the folder PCSG00009 from it and paste it in the same folder as `psvpfstools`
-6. Then run `psvpfsparser.exe -i PCSG00009 -o PCSG00009_dec -z <zRif> -f http://cma.henkaku.xyz`
-7. Get `zRif` from somewhere.
-8. If everything's correct it will decrypt everything into the `PCSG00009_dec`
-9. You still need a Vita to decrypt the `EBOOT.BIN` as it is an FSELF and it's encrypted
-10. Download `FAGDec.vpk` https://github.com/CelesteBlue-dev/PSVita-RE-tools/raw/master/FAGDec/build/FAGDec.vpk
-11. Install `FAGDec.vpk` from Vita Shell.  A new bubble should be on the home screen.
-12. Select the `EBOOT.BIN` file to decrypt and choose `START DECRYPT(ELF)`
+### Installing
 
-![L7CA_header](https://raw.githubusercontent.com/pnvnd/Tales-of-Innocence-R/main/L7CA_decrypted.png)
+Smartphone Tutorial:
 
+ 1. Go to vitashell and head unto `ux0:app/PCSG00009`
 
-## Hacker Note 2 (Outdated)
+ 2. Press the [Triangle] button and select [Open decrypted] option.
 
-1. Compile `psvita-l7ctool.exe` from the taikotools submodule and run this command: `psvita-l7ctool.exe x toidata_release.l7c`
-2. You'll get a message `This archive type is unsupported and most likely won't unpack properly.`
-3. Files get extracted anyway, not sure if extracted correctly though: `_Data/Battle/Effect/00.pck`
+ 3. If you are still on USB mode change it to FTP by pressing the [Start] button and change the [Select] option from USB to FTP, if already on FTP, Skip this step.
 
-## Hacker Note 3
+ 4. Head over to your phone and open [AndFTP]
 
-1. Skip Hacker Note 2
-2. Get `Kuriimu2` from https://github.com/FanTranslatorsInternational/Kuriimu2/releases/tag/1.2.0
-3. Install .NET Core 3.1 Runtime
-4. Open `Kuriimu2.exe` and go to File > Open with Plugin > plugin_bandai_namco.dll > L7C > OK
-5. Select `toidata_release.l7c` (decrypted from Hacker Note 1)
-6. Right-click `_Data` and extract all.
-7. View files in `UTF-8` to get readable Japanese
+ 5. Tap the [+] add button and copy your IP seen on "your" vita screen. 
 
-## Hacker Note 4
-1. ItemDataPack.dat = item name and description
-2. ArtsDataPack.dat - Magic
-3. EnemyParam = artes names, enemy names
-4. BattleBookDataPack.dat seems to be tutorial ( and also end of battle pop ups ?)
-5. these DAT files are easy enough that you could just write a simple Python script that extracts/inserts the text, Python can decode/encode UTF-8 natively
-6. first a 32-bit word that represents the number of "sub sections" or whatever you want to call them. then, starting from offset 0x10, there is a list of offset/size pairs that describes the sub sections. each sub section then contains a sequence of records. the records contain the text (besides others).
-7. the size of a record is always the same within a sub section, but can be different between different sub sections
-8. get from virtual address to offset in the file you'd need to subtract `0x80FFF000`
-9. you only substract the offset to the text section from the base virtual address
-10. `abcde`: if it uses 32-bit math you could try `7F001000` (positive)
-11. `0x175AEC` at this offset there's a pointer to some text
-12. the pointers where the lower 16 and upper 16 bits are a few instructions apart, because they're embedded into the code, and you need to extract the values from the instruction encoding (which abcde probably can't do)
-13. new line `0A`
+ 6. Save it, name it if you want, after that tap your newly added link and this should show up. 
 
-## Hacker Note #4
-1. Change the `eboot.bin` (the one with the 0x1000 SCE header) as follows: offset `0x7B5E` (should contain `01 23`) to `00 23` to fix monospace problem
-2. Also, change the `eboot.bin` as follows: offset `0x8630` (should contain `80 18`) to `40 18`
-3. If `recompile.py` doesn't work, install python package "sortedcontainers", "click", and "pypng": `pip install sortedcontainers`, `pip install click`, `pip install pypng`
-4. Get `Kuriiku2.exe` (CMD version) to batch replace patched files: `Kuriimu2.exe extensions batch-inject orig-dir patch-dir`
-```
-orig-dir
- data_release.l7c (as a file)
+Simply press [OK] and if connection is successful. 
 
-patch-dir
- data_release.l7c (as a directory)
-  _data
-   announcement
-    announcement.anm
- (followed by any number of files in the correct directory relative to the L7c)
-```
+ 7. Choose ux0, then choose [app], locate [PCSG00009], then download both "eboot.bin" and "toidata_release.l7c" into your device by pressing the [Download] button. Wait for it to finish transferring.
 
-## Hacker Note #5
-![movie_subs](https://raw.githubusercontent.com/pnvnd/Tales-of-Innocence-R/main/moviecaptions.png)  
-1. Movie subs can be saved to .SRT format
+ 8. Once the files are finished transferring, head over to unipatcher and start patching the files.
 
-## Hacker Note #6
-![kuriimu2](https://raw.githubusercontent.com/pnvnd/Tales-of-Innocence-R/main/kuriimu2_settings.png)  
-1. Batch inject settings to create patch
+ 9. Choose "raw_eboot.xdelta" for the [Patch File] and for the ROM file choose "eboot.bin" tap the output file and choose where to save it, then press the save button on the lower right corner then the patch will start.
 
-## Credits
-Thanks to Ethanol for basically everything  
-Thanks to LT for for basically everything  
-Thansk to OnePieceFreak for basically everything  
-`Mine` for Translation Script: https://docs.google.com/document/d/12hoLXugMHRRiQ7YrqrB5nvLvxlpH9tIc7yisB_ZI_Y4/edit  
-`kkhdigifantasy13` for Translation Guide: https://drive.google.com/file/d/1sbCzce3OMSNVEKuTcYGWufS-NWkJq4Th/view?usp=sharing  
-`AppleKratue` for Gameplay Guide: https://psnprofiles.com/guide/6120-tales-of-innocence-r-faq (https://twitter.com/talesofkratue)  
+10. Do the same for the other file.
 
-## Tools
-https://gbatemp.net/threads/release-decrypt-and-launch-psn-store-vita-games-without-plugins.548878/
-https://github.com/FanTranslatorsInternational/Kuriimu2  
-https://github.com/onepiecefreak3/taikotools  
-https://github.com/mariodon/taikotools  
+11. After the patch is complete transfer the files once again through FTP.
+
+12. In your RePatch folder create a [PCSG00009] folder and put the patched files inside. It should show the path like this: `ux0:rePatch/PCSG00009`
+
+13. Enjoy and play Tales of Innocence in glorious english translated state brought to you by LifeBottleProduction!
+
+## Help
+
+During the transfer of files, if the connection has been disrupted, I highly recommend deleting the files transferred to the phone as simply overwriting them causes corruption in the data thus will likely cause it not to be patched even if overwritten.
