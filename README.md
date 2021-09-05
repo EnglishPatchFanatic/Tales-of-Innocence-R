@@ -55,6 +55,30 @@ Simply press [OK] and if connection is successful.
 
 13. Enjoy and play Tales of Innocence in glorious english translated state brought to you by LifeBottleProduction!
 
+PC USB:
+
+ 1. Go to vitashell and head unto `ux0:app/PCSG00009`
+
+ 2. Press the [Triangle] button and select [Open decrypted] option. Copy the files somewhere within your downloads folder in the vita.
+
+ 3. Connect the psvita to your PC, and press select on your vitashell it should show "usb connected"
+
+ 4. Head over to your pc and open up [vita] folder in my computer. 
+
+ 5. Choose ux0, then choose go to the folder where you copied it (in my case it is on downloads folder), locate both eboot.bin and toidata_release.l7c, then download both "eboot.bin" and "toidata_release.l7c" into your device by copying it to your PC. Wait for it to finish transferring.
+
+ 6. Once the files are finished transferring, head over to xdelta and start patching the files.
+
+ 9. Choose "raw_eboot.xdelta" for the [Patch File] and for the ROM file choose "eboot.bin" tap the output file and choose where to save it, then press the save button on the lower right corner then the patch will start.
+
+10. Do the same for the other file.
+
+11. After the patch is complete transfer the files once again through USB.
+
+12. In your RePatch folder create a [PCSG00009] folder and put the patched files inside. It should show the path like this: `ux0:rePatch/PCSG00009`
+
+13. Enjoy and play Tales of Innocence in glorious english translated state brought to you by LifeBottleProduction!
+
 ## Help
 
 During the transfer of files, if the connection has been disrupted, I highly recommend deleting the files transferred to the phone as simply overwriting them causes corruption in the data thus will likely cause it not to be patched even if overwritten.
